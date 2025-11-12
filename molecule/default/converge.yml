@@ -12,10 +12,10 @@
       changed_when: false
 
   roles:
-    - role: supertarto.ntp
+    - role: .
 
   post_tasks:
     - name: Check if NTP is enabled
-      command: timedatectl show -p NTP
+      ansible.builtin.command: timedatectl show -p NTP
       register: ntp_status
       changed_when: false

@@ -4,3 +4,8 @@
     name: systemd-timesyncd
     state: restarted
     enabled: true
+
+- name: Set NTP Sync
+  ansible.builtin.command: "timedatectl set-ntp true"
+  register: ntp_sync_result
+  changed_when: "'NTP service: active' not in ntp_sync_result.stdout"

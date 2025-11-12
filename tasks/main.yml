@@ -12,10 +12,10 @@
   ansible.builtin.template:
     src: timesyncd.conf.j2
     dest: "/etc/systemd/timesyncd.conf"
+    owner: root
+    group: root
+    mode: "0644"
   register: ntp_config_change
-  notify: Restart timesyncd
-
-- name: Set NTP Sync
-  ansible.builtin.command: "timedatectl set-ntp true"
-  when: ntp_config_change.changed
-  notify: Restart timesyncd
+  notify:
+    - Set NTP Sync
+    - Restart timesyncd
